@@ -19,15 +19,15 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Crypto>>> GetCryptosAsync()
+        public async Task<ActionResult<List<Crypto>>> GetAllCryptosAsync()
         {
             var data = await _context.Cryptos.ToListAsync();
 
-            var result = from d in data
-                         group d by d.Currency into newGroup
-                         select newGroup;
+            // var result = from d in data
+            //              group d by d.Currency into newGroup
+            //              select newGroup;
 
-            return Ok(result);
+            return Ok(data);
         }
 
         [HttpGet("{id}")]
