@@ -1,4 +1,4 @@
-interface ICrypto{
+export interface ICrypto{
     id: number;
     currency: string;
     date: string;
@@ -7,5 +7,5 @@ interface ICrypto{
     low: number;
     close: number;
     volume: number;
-    marketcap: number;
+    marketCap: number;
 }
