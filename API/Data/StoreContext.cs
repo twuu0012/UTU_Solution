@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using API.Entities;
+using System.Reflection;
 
 namespace API.Data
 {
@@ -9,6 +10,15 @@ namespace API.Data
         {
         }
         public DbSet<Crypto> Cryptos { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            // override the configuration when creating model from entity
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        }
     }
 
 }

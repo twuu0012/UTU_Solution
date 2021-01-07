@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210107035749_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210107053059_DataMigrations")]
+    partial class DataMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,25 +25,27 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Close")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Currency")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
 
                     b.Property<DateTimeOffset>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("High")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Low")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("MarketCap")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Open")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("Volume")
                         .HasColumnType("INTEGER");

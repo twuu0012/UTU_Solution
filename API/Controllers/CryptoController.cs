@@ -1,4 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -6,10 +12,30 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class CryptoController : ControllerBase
     {
-        [HttpGet]
-        public string GetById()
+        private readonly StoreContext _context;
+        public CryptoController(StoreContext context)
         {
-            return "Hello World";
+            _context = context;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Crypto>>> GetCryptosAsync()
+        {
+            var data = await _context.Cryptos.ToListAsync();
+
+            var result = from d in data
+                         group d by d.Currency into newGroup
+                         select newGroup;
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Crypto>> GetCryptoById(int id)
+        {
+            var data = await _context.Cryptos.FirstOrDefaultAsync(c => c.Id == id);
+
+            return Ok(data);
         }
     }
 }

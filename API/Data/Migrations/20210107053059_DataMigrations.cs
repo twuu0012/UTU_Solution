@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class DataMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,12 @@ namespace API.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Currency = table.Column<string>(nullable: true),
+                    Currency = table.Column<string>(maxLength: 50, nullable: false),
                     Date = table.Column<DateTimeOffset>(nullable: false),
-                    Open = table.Column<decimal>(nullable: false),
-                    High = table.Column<decimal>(nullable: false),
-                    Low = table.Column<decimal>(nullable: false),
-                    Close = table.Column<decimal>(nullable: false),
+                    Open = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    High = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Low = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Close = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Volume = table.Column<long>(nullable: false),
                     MarketCap = table.Column<long>(nullable: false)
                 },
