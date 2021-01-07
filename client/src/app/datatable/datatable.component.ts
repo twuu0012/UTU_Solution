@@ -11,19 +11,22 @@ import { DatatableService } from './datatable.service';
 export class DatatableComponent implements OnInit {
   data: ICrypto[] = [];
   arryDate: string[] = [];
+  coinResult: ICoin[] = [];
 
   constructor(private dtService: DatatableService) { }
 
   ngOnInit() {
-    this.getCryptos();
-    
+    this.getDatatableData();
   }
 
-  getCryptos(){
+
+  getDatatableData(){
+    // retrieve cryptos from api
     this.dtService.getCryptos().subscribe(
       (response) => {
         // console.log(response);
         this.data = response;
+        // refactory and build data
         this.getCalculatedData();
       }, error => {
         console.log(error);
@@ -45,6 +48,11 @@ export class DatatableComponent implements OnInit {
   }
 
   getCalculatedData(){
+    // Assumptions:
+    // price is the close price of the day
+    // showing the data of the latest date as the current date
+    // monthly data is calculated from the same day of the last month
+
     // TODO:
     // 1. get all dates
     this.getDate();
@@ -91,7 +99,7 @@ export class DatatableComponent implements OnInit {
 
     // 4. sort by market cap
     coins.sort((a, b) => b.marketCap - a.marketCap);
-    
+    this.coinResult = coins;
 
   }
 

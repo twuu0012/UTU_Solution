@@ -1,1 +1,32 @@
-<p>datatable works!</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-stripped table-hover" style="cursor:pointer">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Coin</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">24h</th>
+                        <th scope="col">7d</th>
+                        <th scope="col">1month</th>
+                        <th scope="col">24h Volume</th>
+                        <th scope="col">Mkt Cap</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let coin of coinResult, let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{coin.coinName}}</td>
+                        <td>{{coin.price | currency}}</td>
+                        <td>{{coin.dailyDiff | percent:'1.1'}}</td>
+                        <td>{{coin.weekDiff | percent:'1.1'}}</td>
+                        <td>{{coin.monthDiff | percent:'1.1'}}</td>
+                        <td>{{coin.dailyVolume | currency}}</td>
+                        <td>{{coin.marketCap | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
