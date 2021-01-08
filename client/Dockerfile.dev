@@ -1,0 +1,14 @@
+FROM node:14.15.3-alpine3.10
+
+WORKDIR '/app'
+
+# install the angular cli and dependencies
+COPY package.json .
+RUN npm i -g @angular/cli@8.3.28
+COPY package-lock.json .
+RUN npm i
+
+# add the app
+COPY . .
+
+CMD ["ng", "serve"]
